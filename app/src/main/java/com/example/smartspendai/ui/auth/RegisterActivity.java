@@ -7,12 +7,18 @@ import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.smartspendai.R;
+import com.example.smartspendai.data.model.UserResponse;
+import com.example.smartspendai.data.repository.AuthRepository;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etName, etEmail, etPassword, etIncome;
+    private Button btnCreateAccount;
+
+    private final AuthRepository authRepository = new AuthRepository();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etIncome = findViewById(R.id.etIncome);
-        Button btnCreateAccount = findViewById(R.id.btnCreateAccount);
+        btnCreateAccount = findViewById(R.id.btnCreateAccount);
         TextView tvLoginLink = findViewById(R.id.tvLoginLink);
         TextView tvBack = findViewById(R.id.tvBack);
 
@@ -37,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
-        String income = etIncome.getText().toString().trim();
+        String incomeStr = etIncome.getText().toString().trim();
 
         if (TextUtils.isEmpty(name)) {
             etName.setError(getString(R.string.error_required_field));
@@ -54,17 +60,45 @@ public class RegisterActivity extends AppCompatActivity {
             etPassword.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(income)) {
+        if (TextUtils.isEmpty(incomeStr)) {
             etIncome.setError(getString(R.string.error_required_field));
             etIncome.requestFocus();
             return;
         }
 
-        // TODO (Milestone 1): POST /auth/register with { name, email, password }.
-        // Monthly income gets saved separately once the `users` table / budget
-        // recommendation API exists (Milestone 7).
+        Integer monthlyIncome;
+        try {
+            monthlyIncome = Integer.parseInt(incomeStr.replaceAll("[^0-9]", ""));
+        } catch (NumberFormatException e) {
+            etIncome.setError("Enter a valid number");
+            etIncome.requestFocus();
+            return;
+        }
 
-        goToLogin();
+        setLoading(true);
+        authRepository.register(name, email, password, monthlyIncome, new AuthRepository.RegisterCallback() {
+            @Override
+            public void onSuccess(UserResponse user) {
+                runOnUiThread(() -> {
+                    setLoading(false);
+                    Toast.makeText(RegisterActivity.this, "Account created! Please log in.", Toast.LENGTH_SHORT).show();
+                    goToLogin();
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                runOnUiThread(() -> {
+                    setLoading(false);
+                    Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+                });
+            }
+        });
+    }
+
+    private void setLoading(boolean loading) {
+        btnCreateAccount.setEnabled(!loading);
+        btnCreateAccount.setText(loading ? "Creating account…" : getString(R.string.btn_create_account));
     }
 
     private void goToLogin() {
