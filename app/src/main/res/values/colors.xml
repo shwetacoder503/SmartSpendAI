@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base -->
+    <color name="ink">#0F1B2D</color>
+    <color name="surface">#16243A</color>
+    <color name="surface_2">#1D2E48</color>
+    <color name="hairline">#1FF2F0EA</color> <!-- 12% alpha over text -->
+
+    <!-- Accents -->
+    <color name="gold">#E8A33D</color>
+    <color name="gold_soft">#F3C878</color>
+    <color name="mint">#4FBA82</color>
+    <color name="coral">#E8615A</color>
+
+    <!-- Text -->
+    <color name="text_primary">#F2F0EA</color>
+    <color name="text_muted">#8B96A8</color>
+    <color name="on_gold">#0F1B2D</color>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartSpend AI</string>
+    <string name="splash_tagline">Track. Understand. Grow your money — with AI that actually explains why.</string>
+    <string name="get_started">Get Started</string>
+
+    <string name="login_title">Welcome back</string>
+    <string name="login_subtitle">Log in to see where your money\'s going.</string>
+    <string name="label_email">EMAIL</string>
+    <string name="label_password">PASSWORD</string>
+    <string name="hint_email">you@example.com</string>
+    <string name="hint_password">••••••••</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="btn_login">Log In</string>
+    <string name="or_divider">OR</string>
+    <string name="continue_google">Continue with Google</string>
+    <string name="no_account">New here?</string>
+    <string name="create_account_link">Create an account</string>
+
+    <string name="register_title">Create account</string>
+    <string name="register_subtitle">Takes less than a minute.</string>
+    <string name="label_name">FULL NAME</string>
+    <string name="hint_name">Your name</string>
+    <string name="label_income">MONTHLY INCOME (for smart budgeting)</string>
+    <string name="hint_income">₹ 30,000</string>
+    <string name="btn_create_account">Create Account</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="login_link">Log in</string>
+
+    <string name="error_required_field">This field is required</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_password_length">Password must be at least 6 characters</string>
+</resources>
