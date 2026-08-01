@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ink"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✕"
+                android:textSize="18sp"
+                android:textColor="@color/text_muted"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/tvScreenTitle"
+                style="@style/TextHeading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="Add Expense" />
+
+            <View
+                android:layout_width="26dp"
+                android:layout_height="1dp" />
+        </LinearLayout>
+
+        <!-- Title -->
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TITLE" />
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="e.g. Swiggy, Uber, Electricity"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#5C6880"
+            android:inputType="text"
+            android:textSize="13.5sp" />
+
+        <!-- Amount -->
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="AMOUNT (₹)" />
+        <EditText
+            android:id="@+id/etAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="0.00"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#5C6880"
+            android:inputType="numberDecimal"
+            android:textSize="13.5sp" />
+
+        <!-- Category -->
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="CATEGORY" />
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:entries="@array/expense_categories"
+            android:popupBackground="@drawable/bg_dropdown_popup"
+            android:spinnerMode="dropdown" />
+
+        <!-- Payment method -->
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="PAYMENT METHOD" />
+        <Spinner
+            android:id="@+id/spinnerPaymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:entries="@array/payment_methods"
+            android:popupBackground="@drawable/bg_dropdown_popup"
+            android:spinnerMode="dropdown" />
+
+        <!-- Note -->
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="NOTE (OPTIONAL)" />
+        <EditText
+            android:id="@+id/etNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="Any extra detail"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#5C6880"
+            android:inputType="text"
+            android:textSize="13.5sp" />
+
+        <Button
+            android:id="@+id/btnSaveExpense"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_button_primary"
+            android:text="Save Expense"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@color/on_gold" />
+
+        <Button
+            android:id="@+id/btnDeleteExpense"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_button_ghost"
+            android:text="Delete Expense"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@color/coral"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

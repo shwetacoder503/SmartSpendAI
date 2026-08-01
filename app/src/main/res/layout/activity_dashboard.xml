@@ -9,7 +9,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Dashboard — coming in Milestone 4"
+        android:layout_marginBottom="80dp"
+        android:text="Dashboard charts — coming in Milestone 4"
         android:textColor="@color/text_muted"
         android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnViewExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingHorizontal="28dp"
+        android:paddingVertical="14dp"
+        android:background="@drawable/bg_button_primary"
+        android:text="View / Add Expenses"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/on_gold" />
 </FrameLayout>
