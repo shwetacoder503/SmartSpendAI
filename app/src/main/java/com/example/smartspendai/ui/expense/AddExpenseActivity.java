@@ -26,6 +26,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     public static final String EXTRA_PAYMENT_METHOD = "extra_payment_method";
     public static final String EXTRA_NOTE = "extra_note";
     public static final String EXTRA_DATE_MILLIS = "extra_date_millis";
+    public static final String EXTRA_REMOTE_ID = "extra_remote_id";
 
     private ExpenseViewModel viewModel;
 
@@ -34,6 +35,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     private long editingExpenseId = -1L;
     private long editingDateMillis = -1L;
+    private long editingRemoteId = -1L; // -1 sentinel means "never synced yet"
     private boolean isEditMode = false;
 
     @Override
@@ -66,6 +68,7 @@ public class AddExpenseActivity extends AppCompatActivity {
             isEditMode = true;
             editingExpenseId = intent.getLongExtra(EXTRA_EXPENSE_ID, -1L);
             editingDateMillis = intent.getLongExtra(EXTRA_DATE_MILLIS, System.currentTimeMillis());
+            editingRemoteId = intent.getLongExtra(EXTRA_REMOTE_ID, -1L);
 
             tvScreenTitle.setText("Edit Expense");
             btnSave.setText("Update Expense");
@@ -145,6 +148,8 @@ public class AddExpenseActivity extends AppCompatActivity {
             expense.paymentMethod = paymentMethod;
             expense.note = note;
             expense.dateMillis = editingDateMillis; // keep the original date on edit
+            expense.remoteId = (editingRemoteId == -1L) ? null : editingRemoteId;
+            expense.isSynced = false; // content changed — needs re-syncing (as an UPDATE if remoteId is set)
             viewModel.updateExpense(expense);
             Toast.makeText(this, "Expense updated", Toast.LENGTH_SHORT).show();
         } else {

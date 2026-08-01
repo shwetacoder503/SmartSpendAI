@@ -46,9 +46,16 @@ public class ExpenseEntity {
     /**
      * true  = already synced with the backend (Milestone 3)
      * false = created/edited offline, still needs to be pushed
-     * Not used yet in Milestone 2, but keeping the column here now saves us
-     * a painful Room migration later.
      */
     @ColumnInfo(name = "is_synced", defaultValue = "0")
     public boolean isSynced = false;
+
+    /**
+     * The ID the SERVER assigned this expense once it's been pushed.
+     * Null until the first successful sync. We need this separate from
+     * `id` because `id` is a LOCAL, per-device auto-increment number —
+     * two different phones could easily both have a local expense #7.
+     */
+    @ColumnInfo(name = "remote_id")
+    public Long remoteId;
 }

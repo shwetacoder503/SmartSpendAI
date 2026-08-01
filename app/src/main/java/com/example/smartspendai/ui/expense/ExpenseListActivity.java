@@ -3,7 +3,9 @@ package com.example.smartspendai.ui.expense;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartspendai.R;
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
+import com.example.smartspendai.data.repository.ExpenseRepository;
 
 import java.util.List;
 
@@ -30,7 +33,8 @@ public class ExpenseListActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerExpenses);
         TextView tvEmptyState = findViewById(R.id.tvEmptyState);
-        android.widget.Button fabAdd = findViewById(R.id.fabAddExpense);
+        Button fabAdd = findViewById(R.id.fabAddExpense);
+        Button btnSync = findViewById(R.id.btnSync);
 
         adapter = new ExpenseAdapter(new ExpenseAdapter.OnExpenseClickListener() {
             @Override
@@ -60,6 +64,32 @@ public class ExpenseListActivity extends AppCompatActivity {
 
         fabAdd.setOnClickListener(v ->
                 startActivity(new Intent(this, AddExpenseActivity.class)));
+
+        btnSync.setOnClickListener(v -> {
+            btnSync.setEnabled(false);
+            btnSync.setText("Syncing…");
+            viewModel.syncNow(new ExpenseRepository.SyncCallback() {
+                @Override
+                public void onSyncSuccess(int pushedCount, int pulledCount) {
+                    runOnUiThread(() -> {
+                        btnSync.setEnabled(true);
+                        btnSync.setText("⟳ Sync");
+                        Toast.makeText(ExpenseListActivity.this,
+                                "Synced — " + pushedCount + " sent, " + pulledCount + " received",
+                                Toast.LENGTH_SHORT).show();
+                    });
+                }
+
+                @Override
+                public void onSyncError(String message) {
+                    runOnUiThread(() -> {
+                        btnSync.setEnabled(true);
+                        btnSync.setText("⟳ Sync");
+                        Toast.makeText(ExpenseListActivity.this, message, Toast.LENGTH_LONG).show();
+                    });
+                }
+            });
+        });
     }
 
     private void openEditScreen(ExpenseEntity expense) {
@@ -71,6 +101,7 @@ public class ExpenseListActivity extends AppCompatActivity {
         intent.putExtra(AddExpenseActivity.EXTRA_PAYMENT_METHOD, expense.paymentMethod);
         intent.putExtra(AddExpenseActivity.EXTRA_NOTE, expense.note);
         intent.putExtra(AddExpenseActivity.EXTRA_DATE_MILLIS, expense.dateMillis);
+        intent.putExtra(AddExpenseActivity.EXTRA_REMOTE_ID, expense.remoteId != null ? expense.remoteId : -1L);
         startActivity(intent);
     }
 

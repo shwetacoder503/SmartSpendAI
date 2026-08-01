@@ -18,7 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etName, etEmail, etPassword, etIncome;
     private Button btnCreateAccount;
 
-    private final AuthRepository authRepository = new AuthRepository();
+    private AuthRepository authRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import com.example.smartspendai.data.local.dao.ExpenseDao;
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
 
-@Database(entities = {ExpenseEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {ExpenseEntity.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ExpenseDao expenseDao();

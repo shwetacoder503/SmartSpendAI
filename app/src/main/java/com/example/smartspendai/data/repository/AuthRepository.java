@@ -1,5 +1,7 @@
 package com.example.smartspendai.data.repository;
 
+import android.content.Context;
+
 import com.example.smartspendai.data.model.LoginRequest;
 import com.example.smartspendai.data.model.RegisterRequest;
 import com.example.smartspendai.data.model.TokenResponse;
@@ -21,8 +23,8 @@ public class AuthRepository {
 
     private final AuthApiService api;
 
-    public AuthRepository() {
-        api = RetrofitClient.getInstance().create(AuthApiService.class);
+    public AuthRepository(Context context) {
+        api = RetrofitClient.getInstance(context).create(AuthApiService.class);
     }
 
     public interface RegisterCallback {

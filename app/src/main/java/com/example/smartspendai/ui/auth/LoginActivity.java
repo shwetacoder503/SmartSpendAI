@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin;
 
-    private final AuthRepository authRepository = new AuthRepository();
+    private AuthRepository authRepository;
     private TokenManager tokenManager;
 
     @Override
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         tokenManager = new TokenManager(this);
-
+        authRepository = new AuthRepository(this);
         // Already logged in from a previous session? Skip straight to the dashboard.
         if (tokenManager.isLoggedIn()) {
             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));

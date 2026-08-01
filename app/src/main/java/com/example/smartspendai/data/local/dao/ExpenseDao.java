@@ -40,4 +40,16 @@ public interface ExpenseDao {
 
     @Query("SELECT COALESCE(SUM(amount), 0) FROM expenses WHERE date_millis >= :startOfDayMillis")
     LiveData<Double> getTodayTotal(long startOfDayMillis);
+
+    // ---- Sync-related queries (Milestone 3) ----
+
+    /** Expenses created/edited offline that the server doesn't know about yet. */
+    @Query("SELECT * FROM expenses WHERE is_synced = 0")
+    List<ExpenseEntity> getUnsyncedExpenses();
+
+    @Query("UPDATE expenses SET is_synced = 1, remote_id = :remoteId WHERE id = :localId")
+    void markSynced(long localId, long remoteId);
+
+    @Query("SELECT COUNT(*) FROM expenses WHERE remote_id = :remoteId")
+    int countByRemoteId(long remoteId);
 }

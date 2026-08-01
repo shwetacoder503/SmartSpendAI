@@ -55,4 +55,8 @@ public class ExpenseViewModel extends AndroidViewModel {
     public void deleteExpense(ExpenseEntity expense) {
         repository.delete(expense);
     }
+
+    public void syncNow(ExpenseRepository.SyncCallback callback) {
+        repository.syncNow(callback);
+    }
 }
