@@ -73,7 +73,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(TokenResponse tokenResponse) {
                 runOnUiThread(() -> {
                     setLoading(false);
-                    tokenManager.saveSession(tokenResponse.getAccessToken(), tokenResponse.getUser().getName());
+                    tokenManager.saveSession(
+                            tokenResponse.getAccessToken(),
+                            tokenResponse.getUser().getName(),
+                            tokenResponse.getUser().getMonthlyIncome()
+                    );
                     startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                     finish();
                 });

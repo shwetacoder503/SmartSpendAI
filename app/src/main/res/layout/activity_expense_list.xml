@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingHorizontal="8dp"
-            android:paddingBottom="90dp"
+            android:paddingBottom="170dp"
             android:clipToPadding="false" />
 
     </LinearLayout>
@@ -69,12 +69,38 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/bg_button_primary"
         android:text="+"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/on_gold"
         android:elevation="8dp" />
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/surface"
+        android:elevation="12dp">
+
+        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="18sp" android:text="🏠" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10.5sp" android:textColor="@color/text_muted" android:text="Home" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navAnalytics" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="18sp" android:text="📊" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10.5sp" android:textColor="@color/text_muted" android:text="Analytics" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navExpenses" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="18sp" android:text="🧾" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10.5sp" android:textStyle="bold" android:textColor="@color/gold_soft" android:text="Expenses" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

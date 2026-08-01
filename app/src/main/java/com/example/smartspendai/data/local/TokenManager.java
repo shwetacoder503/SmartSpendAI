@@ -19,6 +19,7 @@ public class TokenManager {
     private static final String PREFS_NAME = "smartspend_secure_prefs";
     private static final String KEY_TOKEN = "jwt_token";
     private static final String KEY_USER_NAME = "user_name";
+    private static final String KEY_MONTHLY_INCOME = "monthly_income";
 
     private final SharedPreferences prefs;
 
@@ -45,10 +46,21 @@ public class TokenManager {
     }
 
     public void saveSession(String token, String userName) {
-        prefs.edit()
+        saveSession(token, userName, null);
+    }
+
+    public void saveSession(String token, String userName, Integer monthlyIncome) {
+        SharedPreferences.Editor editor = prefs.edit()
                 .putString(KEY_TOKEN, token)
-                .putString(KEY_USER_NAME, userName)
-                .apply();
+                .putString(KEY_USER_NAME, userName);
+        if (monthlyIncome != null) {
+            editor.putInt(KEY_MONTHLY_INCOME, monthlyIncome);
+        }
+        editor.apply();
+    }
+
+    public int getMonthlyIncome() {
+        return prefs.getInt(KEY_MONTHLY_INCOME, 0); // 0 = "not set yet"
     }
 
     public String getToken() {

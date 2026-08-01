@@ -52,8 +52,24 @@ public class ExpenseRepository {
         return expenseDao.getTodayTotal(startOfDayMillis);
     }
 
+    public LiveData<List<ExpenseEntity>> getExpensesBetween(long startMillis, long endMillis) {
+        return expenseDao.getExpensesBetween(startMillis, endMillis);
+    }
+
     public LiveData<Double> getTotalBetween(long startMillis, long endMillis) {
         return expenseDao.getTotalBetween(startMillis, endMillis);
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.CategoryTotal>> getCategoryTotals(long startMillis, long endMillis) {
+        return expenseDao.getCategoryTotals(startMillis, endMillis);
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.DayTotal>> getDayOfWeekTotals(long startMillis, long endMillis) {
+        return expenseDao.getDayOfWeekTotals(startMillis, endMillis);
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.MonthTotal>> getLast5MonthsTotals() {
+        return expenseDao.getLast5MonthsTotals();
     }
 
     public void insert(ExpenseEntity expense) {

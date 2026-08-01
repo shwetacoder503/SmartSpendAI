@@ -36,6 +36,46 @@ public class ExpenseViewModel extends AndroidViewModel {
         return repository.getTodayTotal(cal.getTimeInMillis());
     }
 
+    public static long startOfThisMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTimeInMillis();
+    }
+
+    public static long startOfLast7Days() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, -6); // today + previous 6 days = 7 days total
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTimeInMillis();
+    }
+
+    public LiveData<Double> getMonthTotal() {
+        return repository.getTotalBetween(startOfThisMonth(), System.currentTimeMillis());
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.CategoryTotal>> getCategoryTotalsThisMonth() {
+        return repository.getCategoryTotals(startOfThisMonth(), System.currentTimeMillis());
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.DayTotal>> getDayOfWeekTotalsThisMonth() {
+        return repository.getDayOfWeekTotals(startOfThisMonth(), System.currentTimeMillis());
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.MonthTotal>> getLast5MonthsTotals() {
+        return repository.getLast5MonthsTotals();
+    }
+
+    public LiveData<List<ExpenseEntity>> getExpensesLast7Days() {
+        return repository.getExpensesBetween(startOfLast7Days(), System.currentTimeMillis());
+    }
+
     public void addExpense(String title, double amount, String category,
                             String paymentMethod, String note) {
         ExpenseEntity expense = new ExpenseEntity();

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartspendai.R;
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
 import com.example.smartspendai.data.repository.ExpenseRepository;
+import com.example.smartspendai.ui.analytics.AnalyticsActivity;
+import com.example.smartspendai.ui.dashboard.DashboardActivity;
 
 import java.util.List;
 
@@ -90,6 +92,14 @@ public class ExpenseListActivity extends AppCompatActivity {
                 }
             });
         });
+
+        findViewById(R.id.navHome).setOnClickListener(v -> {
+            startActivity(new Intent(this, DashboardActivity.class));
+            finish();
+        });
+        findViewById(R.id.navAnalytics).setOnClickListener(v ->
+                startActivity(new Intent(this, AnalyticsActivity.class)));
+        // navExpenses: already here, intentionally does nothing.
     }
 
     private void openEditScreen(ExpenseEntity expense) {

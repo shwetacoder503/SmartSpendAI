@@ -5,25 +5,182 @@
     android:layout_height="match_parent"
     android:background="@color/ink">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="80dp"
-        android:text="Dashboard charts — coming in Milestone 4"
-        android:textColor="@color/text_muted"
-        android:textSize="14sp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="90dp">
 
-    <Button
-        android:id="@+id/btnViewExpenses"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingHorizontal="28dp"
-        android:paddingVertical="14dp"
-        android:background="@drawable/bg_button_primary"
-        android:text="View / Add Expenses"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:textColor="@color/on_gold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="44dp">
+
+            <TextView
+                android:id="@+id/tvGreeting"
+                style="@style/TextBodyMuted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good to see you" />
+
+            <!-- Balance hero card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_logo_mark"
+                android:padding="18dp"
+                android:layout_marginTop="14dp">
+
+                <TextView
+                    style="@style/TextLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SPENT THIS MONTH" />
+
+                <TextView
+                    android:id="@+id/tvMonthTotal"
+                    style="@style/TextHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="30sp"
+                    android:text="₹0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TODAY" />
+                        <TextView android:id="@+id/tvTodayTotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/coral" android:textStyle="bold" android:textSize="15sp" android:text="₹0" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="REMAINING BUDGET" />
+                        <TextView android:id="@+id/tvRemainingBudget" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/mint" android:textStyle="bold" android:textSize="15sp" android:text="Set income to see" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="14dp"
+                    android:background="#14FFFFFF">
+                    <View
+                        android:id="@+id/budgetFill"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:background="@drawable/bg_button_primary" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvBudgetCaption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:text="Add your income at registration to track budget %" />
+
+            </LinearLayout>
+
+            <!-- Recent expenses -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="8dp">
+                <TextView style="@style/TextHeading" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="15sp" android:text="Recent Expenses" />
+                <TextView
+                    android:id="@+id/tvSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See all"
+                    android:textColor="@color/gold_soft"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llRecentExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/surface"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvNoExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:gravity="center"
+                android:text="No expenses yet — add one to see it here."
+                android:textColor="@color/text_muted"
+                android:textSize="12.5sp"
+                android:visibility="gone" />
+
+            <!-- Monthly trend -->
+            <TextView
+                style="@style/TextHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="15sp"
+                android:text="Monthly Trend" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChartTrend"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom nav -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/surface"
+        android:elevation="12dp">
+
+        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="18sp" android:text="🏠" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10.5sp" android:textStyle="bold" android:textColor="@color/gold_soft" android:text="Home" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navAnalytics" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="18sp" android:text="📊" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10.5sp" android:textColor="@color/text_muted" android:text="Analytics" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navExpenses" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="18sp" android:text="🧾" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10.5sp" android:textColor="@color/text_muted" android:text="Expenses" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
 </FrameLayout>

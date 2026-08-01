@@ -8,6 +8,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
+import com.example.smartspendai.data.local.pojo.CategoryTotal;
+import com.example.smartspendai.data.local.pojo.DayTotal;
+import com.example.smartspendai.data.local.pojo.MonthTotal;
 
 import java.util.List;
 
@@ -52,4 +55,28 @@ public interface ExpenseDao {
 
     @Query("SELECT COUNT(*) FROM expenses WHERE remote_id = :remoteId")
     int countByRemoteId(long remoteId);
+
+    // ---- Analytics queries (Milestone 4) ----
+
+    @Query("SELECT category, SUM(amount) as total FROM expenses " +
+            "WHERE date_millis BETWEEN :startMillis AND :endMillis " +
+            "GROUP BY category ORDER BY total DESC")
+    LiveData<List<CategoryTotal>> getCategoryTotals(long startMillis, long endMillis);
+
+    /**
+     * strftime('%w', ...) returns the day of week as text ('0'..'6'), so we
+     * CAST it to INTEGER to get a real number back into DayTotal.dow.
+     * date_millis is stored in milliseconds, but strftime expects seconds
+     * since epoch — hence the "/1000".
+     */
+    @Query("SELECT CAST(strftime('%w', date_millis/1000, 'unixepoch') AS INTEGER) as dow, " +
+            "SUM(amount) as total FROM expenses " +
+            "WHERE date_millis BETWEEN :startMillis AND :endMillis " +
+            "GROUP BY dow")
+    LiveData<List<DayTotal>> getDayOfWeekTotals(long startMillis, long endMillis);
+
+    @Query("SELECT strftime('%Y-%m', date_millis/1000, 'unixepoch') as yearMonth, " +
+            "SUM(amount) as total FROM expenses " +
+            "GROUP BY yearMonth ORDER BY yearMonth DESC LIMIT 5")
+    LiveData<List<MonthTotal>> getLast5MonthsTotals();
 }
