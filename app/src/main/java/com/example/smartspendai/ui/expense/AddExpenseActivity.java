@@ -15,7 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartspendai.R;
+import com.example.smartspendai.data.local.entity.CategoryEntity;
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
+import com.example.smartspendai.ui.category.CategoryViewModel;
+import com.example.smartspendai.ui.category.ManageCategoriesActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
@@ -29,6 +35,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     public static final String EXTRA_REMOTE_ID = "extra_remote_id";
 
     private ExpenseViewModel viewModel;
+    private CategoryViewModel categoryViewModel;
 
     private EditText etTitle, etAmount, etNote;
     private Spinner spinnerCategory, spinnerPaymentMethod;
@@ -38,15 +45,20 @@ public class AddExpenseActivity extends AppCompatActivity {
     private long editingRemoteId = -1L; // -1 sentinel means "never synced yet"
     private boolean isEditMode = false;
 
+    /** Category the Intent asked us to preselect — applied once the DB list finishes loading. */
+    private String pendingCategorySelection;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
 
         viewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
 
         TextView tvClose = findViewById(R.id.tvClose);
         TextView tvScreenTitle = findViewById(R.id.tvScreenTitle);
+        TextView tvManageCategories = findViewById(R.id.tvManageCategories);
         etTitle = findViewById(R.id.etTitle);
         etAmount = findViewById(R.id.etAmount);
         etNote = findViewById(R.id.etNote);
@@ -55,10 +67,12 @@ public class AddExpenseActivity extends AppCompatActivity {
         Button btnSave = findViewById(R.id.btnSaveExpense);
         Button btnDelete = findViewById(R.id.btnDeleteExpense);
 
-        applyDarkSpinnerStyle(spinnerCategory);
-        applyDarkSpinnerStyle(spinnerPaymentMethod);
+        applyDarkSpinnerStyle(spinnerPaymentMethod, R.array.payment_methods);
+        setupCategorySpinner();
 
         tvClose.setOnClickListener(v -> finish());
+        tvManageCategories.setOnClickListener(v ->
+                startActivity(new Intent(this, ManageCategoriesActivity.class)));
 
         // If this Activity was opened to EDIT an existing expense, the
         // caller passes the expense's fields as intent extras. We prefill
@@ -77,7 +91,7 @@ public class AddExpenseActivity extends AppCompatActivity {
             etTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             etAmount.setText(String.valueOf(intent.getDoubleExtra(EXTRA_AMOUNT, 0)));
             etNote.setText(intent.getStringExtra(EXTRA_NOTE));
-            setSpinnerSelection(spinnerCategory, intent.getStringExtra(EXTRA_CATEGORY));
+            pendingCategorySelection = intent.getStringExtra(EXTRA_CATEGORY);
             setSpinnerSelection(spinnerPaymentMethod, intent.getStringExtra(EXTRA_PAYMENT_METHOD));
         }
 
@@ -86,22 +100,42 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
 
     /**
+     * Categories now come from the `categories` table (Milestone 5), not a
+     * static array — this lets the user add their own custom categories in
+     * Manage Categories and see them here immediately.
+     */
+    private void setupCategorySpinner() {
+        categoryViewModel.getAllCategories().observe(this, (List<CategoryEntity> categories) -> {
+            List<String> names = new ArrayList<>();
+            for (CategoryEntity category : categories) {
+                names.add(category.name);
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_selected, names);
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            spinnerCategory.setAdapter(adapter);
+
+            if (pendingCategorySelection != null) {
+                setSpinnerSelection(spinnerCategory, pendingCategorySelection);
+            }
+        });
+    }
+
+    /**
      * Spinner's default popup uses the system's light theme colors, which
      * look broken on our dark background. Pointing it at our own layouts
      * (spinner_item_selected / spinner_dropdown_item, both already styled
      * dark) fixes that without needing a full Material dropdown component.
      */
-    private void applyDarkSpinnerStyle(Spinner spinner) {
+    private void applyDarkSpinnerStyle(Spinner spinner, int arrayResId) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                spinner == findViewById(R.id.spinnerCategory) ? R.array.expense_categories : R.array.payment_methods,
-                R.layout.spinner_item_selected);
+                this, arrayResId, R.layout.spinner_item_selected);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
     private void setSpinnerSelection(Spinner spinner, String value) {
-        if (value == null) return;
+        if (value == null || spinner.getAdapter() == null) return;
         ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
         int position = adapter.getPosition(value);
         if (position >= 0) spinner.setSelection(position);

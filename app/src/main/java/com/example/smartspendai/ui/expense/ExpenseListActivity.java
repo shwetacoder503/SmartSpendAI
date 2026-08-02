@@ -37,6 +37,10 @@ public class ExpenseListActivity extends AppCompatActivity {
         TextView tvEmptyState = findViewById(R.id.tvEmptyState);
         Button fabAdd = findViewById(R.id.fabAddExpense);
         Button btnSync = findViewById(R.id.btnSync);
+        findViewById(R.id.tvSearchIcon).setOnClickListener(v ->
+                startActivity(new Intent(this, SearchActivity.class)));
+        findViewById(R.id.tvReportIcon).setOnClickListener(v ->
+                startActivity(new Intent(this, com.example.smartspendai.ui.report.ReportActivity.class)));
 
         adapter = new ExpenseAdapter(new ExpenseAdapter.OnExpenseClickListener() {
             @Override

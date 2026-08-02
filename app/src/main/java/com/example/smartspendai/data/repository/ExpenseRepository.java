@@ -99,6 +99,10 @@ public class ExpenseRepository {
         });
     }
 
+    public LiveData<List<ExpenseEntity>> searchExpenses(String category, String query, long startMillis, long endMillis) {
+        return expenseDao.searchExpenses(category, query, startMillis, endMillis);
+    }
+
     // ---- Sync (Milestone 3) ----
 
     public interface SyncCallback {

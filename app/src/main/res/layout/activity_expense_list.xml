@@ -28,6 +28,26 @@
                 android:textSize="20sp"
                 android:text="Expense History" />
 
+            <TextView
+                android:id="@+id/tvSearchIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔍"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/tvReportIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📄"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true" />
+
             <Button
                 android:id="@+id/btnSync"
                 android:layout_width="wrap_content"

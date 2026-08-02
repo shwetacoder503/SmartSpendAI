@@ -76,7 +76,23 @@
             android:textSize="13.5sp" />
 
         <!-- Category -->
-        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="CATEGORY" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <TextView style="@style/TextLabel" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="CATEGORY" />
+            <TextView
+                android:id="@+id/tvManageCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage"
+                android:textColor="@color/gold_soft"
+                android:textStyle="bold"
+                android:textSize="11sp"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
         <Spinner
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.example.smartspendai.ui.expense;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -60,6 +61,16 @@ public class ExpenseViewModel extends AndroidViewModel {
         return repository.getTotalBetween(startOfThisMonth(), System.currentTimeMillis());
     }
 
+    // ---- Generic range queries (Milestone 5 — Reports) ----
+
+    public LiveData<Double> getTotalForRange(long startMillis, long endMillis) {
+        return repository.getTotalBetween(startMillis, endMillis);
+    }
+
+    public LiveData<List<com.example.smartspendai.data.local.pojo.CategoryTotal>> getCategoryTotalsForRange(long startMillis, long endMillis) {
+        return repository.getCategoryTotals(startMillis, endMillis);
+    }
+
     public LiveData<List<com.example.smartspendai.data.local.pojo.CategoryTotal>> getCategoryTotalsThisMonth() {
         return repository.getCategoryTotals(startOfThisMonth(), System.currentTimeMillis());
     }
@@ -74,6 +85,15 @@ public class ExpenseViewModel extends AndroidViewModel {
 
     public LiveData<List<ExpenseEntity>> getExpensesLast7Days() {
         return repository.getExpensesBetween(startOfLast7Days(), System.currentTimeMillis());
+    }
+
+    /**
+     * @param category null means "all categories"
+     * @param query    empty string means "match any title" (SQL LIKE '%%' matches everything)
+     */
+    public LiveData<List<ExpenseEntity>> searchExpenses(@Nullable String category, String query,
+                                                         long startMillis, long endMillis) {
+        return repository.searchExpenses(category, query, startMillis, endMillis);
     }
 
     public void addExpense(String title, double amount, String category,

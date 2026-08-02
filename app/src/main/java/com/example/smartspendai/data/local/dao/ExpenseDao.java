@@ -79,4 +79,18 @@ public interface ExpenseDao {
             "SUM(amount) as total FROM expenses " +
             "GROUP BY yearMonth ORDER BY yearMonth DESC LIMIT 5")
     LiveData<List<MonthTotal>> getLast5MonthsTotals();
+
+    // ---- Search (Milestone 5) ----
+
+    /**
+     * `:category` can be null (meaning "all categories" — the "category IS NULL"
+     * branch makes that column check pass regardless of the row's actual category).
+     * `:query` matches title using SQL LIKE, so partial/merchant-name search works.
+     */
+    @Query("SELECT * FROM expenses WHERE " +
+            "(:category IS NULL OR category = :category) AND " +
+            "title LIKE '%' || :query || '%' AND " +
+            "date_millis BETWEEN :startMillis AND :endMillis " +
+            "ORDER BY date_millis DESC")
+    LiveData<List<ExpenseEntity>> searchExpenses(String category, String query, long startMillis, long endMillis);
 }
