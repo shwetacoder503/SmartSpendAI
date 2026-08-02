@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ink">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="44dp">
+
+            <TextView
+                style="@style/TextHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:textSize="20sp"
+                android:text="AI Insights" />
+
+            <!-- Health Score -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_logo_mark"
+                android:padding="18dp"
+                android:gravity="center">
+
+                <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FINANCIAL HEALTH SCORE" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="6dp">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/gaugeChart"
+                        android:layout_width="220dp"
+                        android:layout_height="140dp"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/tvHealthScoreValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        style="@style/TextHeading"
+                        android:textSize="34sp"
+                        android:text="—" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/llHealthExplanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Forecast -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/surface"
+                android:padding="16dp"
+                android:layout_marginTop="16dp">
+
+                <TextView style="@style/TextHeading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="14sp" android:text="Expense Forecast" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NEXT WEEK" />
+                        <TextView android:id="@+id/tvForecastWeek" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/gold_soft" android:textStyle="bold" android:textSize="18sp" android:text="—" />
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="NEXT MONTH" />
+                        <TextView android:id="@+id/tvForecastMonth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/gold_soft" android:textStyle="bold" android:textSize="18sp" android:text="—" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvForecastMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11.5sp"
+                    android:text="" />
+            </LinearLayout>
+
+            <!-- Budget -->
+            <TextView
+                style="@style/TextHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="14sp"
+                android:text="Recommended Budget" />
+
+            <TextView
+                android:id="@+id/tvBudgetMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_muted"
+                android:textSize="11.5sp"
+                android:layout_marginBottom="8dp"
+                android:text="" />
+
+            <LinearLayout
+                android:id="@+id/llBudgetBreakdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/surface" />
+
+            <!-- Saving Suggestions -->
+            <TextView
+                style="@style/TextHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="14sp"
+                android:text="Saving Suggestions" />
+
+            <LinearLayout
+                android:id="@+id/llSuggestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/tvNoSuggestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:gravity="center"
+                android:text="No overspending flagged this month — nice work!"
+                android:textColor="@color/mint"
+                android:textSize="12.5sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom nav (4 tabs now) -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/surface"
+        android:elevation="12dp">
+
+        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="17sp" android:text="🏠" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10sp" android:textColor="@color/text_muted" android:text="Home" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navAnalytics" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="17sp" android:text="📊" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10sp" android:textColor="@color/text_muted" android:text="Analytics" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navExpenses" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="17sp" android:text="🧾" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10sp" android:textColor="@color/text_muted" android:text="Expenses" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/navInsights" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
+            <TextView android:textSize="17sp" android:text="✨" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="10sp" android:textStyle="bold" android:textColor="@color/gold_soft" android:text="Insights" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

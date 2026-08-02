@@ -219,6 +219,8 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AnalyticsActivity.class)));
         findViewById(R.id.navExpenses).setOnClickListener(v ->
                 startActivity(new Intent(this, ExpenseListActivity.class)));
+        findViewById(R.id.navInsights).setOnClickListener(v ->
+                startActivity(new Intent(this, com.example.smartspendai.ui.insights.AIInsightsActivity.class)));
         // navHome: already here, intentionally does nothing.
     }
 }

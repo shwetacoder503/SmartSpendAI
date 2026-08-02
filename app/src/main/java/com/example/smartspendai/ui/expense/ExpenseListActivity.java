@@ -99,6 +99,8 @@ public class ExpenseListActivity extends AppCompatActivity {
         });
         findViewById(R.id.navAnalytics).setOnClickListener(v ->
                 startActivity(new Intent(this, AnalyticsActivity.class)));
+        findViewById(R.id.navInsights).setOnClickListener(v ->
+                startActivity(new Intent(this, com.example.smartspendai.ui.insights.AIInsightsActivity.class)));
         // navExpenses: already here, intentionally does nothing.
     }
 
