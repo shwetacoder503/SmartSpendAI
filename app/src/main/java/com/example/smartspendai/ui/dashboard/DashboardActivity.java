@@ -73,6 +73,10 @@ public class DashboardActivity extends AppCompatActivity {
 
         findViewById(R.id.tvSeeAll).setOnClickListener(v ->
                 startActivity(new Intent(this, ExpenseListActivity.class)));
+        findViewById(R.id.tvSettingsIcon).setOnClickListener(v ->
+                startActivity(new Intent(this, com.example.smartspendai.ui.settings.SettingsActivity.class)));
+        findViewById(R.id.tvGoalsIcon).setOnClickListener(v ->
+                startActivity(new Intent(this, com.example.smartspendai.ui.goal.GoalListActivity.class)));
     }
 
     private void observeData() {

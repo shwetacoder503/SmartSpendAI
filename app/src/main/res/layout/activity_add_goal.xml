@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ink"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✕"
+                android:textSize="18sp"
+                android:textColor="@color/text_muted"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                style="@style/TextHeading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="New Saving Goal" />
+
+            <View android:layout_width="26dp" android:layout_height="1dp" />
+        </LinearLayout>
+
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GOAL TITLE" />
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="e.g. Goa Trip, New Laptop"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#5C6880"
+            android:inputType="text"
+            android:textSize="13.5sp" />
+
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="TARGET AMOUNT (₹)" />
+        <EditText
+            android:id="@+id/etTargetAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="0.00"
+            android:textColor="@color/text_primary"
+            android:textColorHint="#5C6880"
+            android:inputType="numberDecimal"
+            android:textSize="13.5sp" />
+
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="TARGET DATE (OPTIONAL)" />
+        <Button
+            android:id="@+id/btnPickDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/bg_input_field"
+            android:text="Pick a date"
+            android:textAllCaps="false"
+            android:textColor="@color/text_muted"
+            android:gravity="start|center_vertical"
+            android:textSize="13.5sp" />
+
+        <Button
+            android:id="@+id/btnSaveGoal"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_button_primary"
+            android:text="Create Goal"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@color/on_gold" />
+
+    </LinearLayout>
+</ScrollView>

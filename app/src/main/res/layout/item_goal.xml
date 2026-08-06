@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/surface"
+    android:padding="16dp"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/tvGoalTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        tools:text="Goa Trip" />
+
+    <TextView
+        android:id="@+id/tvGoalProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/text_muted"
+        android:textSize="11.5sp"
+        tools:text="₹3,200 of ₹10,000 saved" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="10dp"
+        android:background="#14FFFFFF">
+        <View
+            android:id="@+id/goalProgressFill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@drawable/bg_button_primary" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvGoalEstimate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/mint"
+        android:textSize="11sp"
+        tools:text="Estimated completion: Dec 2026" />
+
+</LinearLayout>

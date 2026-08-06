@@ -53,6 +53,10 @@ public class ManageCategoriesActivity extends AppCompatActivity {
                 .setView(input)
                 .setPositiveButton("Add", (dialog, which) -> {
                     String name = input.getText().toString().trim();
+
+                    if (!name.isEmpty()) {
+                        name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+                    }
                     if (TextUtils.isEmpty(name)) {
                         Toast.makeText(this, "Enter a category name", Toast.LENGTH_SHORT).show();
                         return;

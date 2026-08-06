@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ink"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:id="@+id/tvClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✕"
+                android:textSize="18sp"
+                android:textColor="@color/text_muted"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                style="@style/TextHeading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:text="🔮 What-If Simulator" />
+
+            <View android:layout_width="26dp" android:layout_height="1dp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextBodyMuted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="See how much you'd save if you cut back on a category — based on what you actually spent this month." />
+
+        <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PICK A CATEGORY" />
+        <Spinner
+            android:id="@+id/spinnerWhatIfCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:popupBackground="@drawable/bg_dropdown_popup" />
+
+        <TextView
+            android:id="@+id/tvNoCategoryData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="30dp"
+            android:gravity="center"
+            android:text="No expenses this month yet — add a few to try the simulator."
+            android:textColor="@color/text_muted"
+            android:textSize="12.5sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/llSimulatorBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:text="REDUCE SPENDING BY" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView android:id="@+id/chip10" style="@style/TextLabel" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="6dp" android:padding="10dp" android:gravity="center" android:text="10%" android:textSize="13sp" android:textColor="@color/text_muted" android:background="@drawable/bg_button_ghost" android:clickable="true" android:focusable="true" />
+                <TextView android:id="@+id/chip20" style="@style/TextLabel" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginHorizontal="6dp" android:padding="10dp" android:gravity="center" android:text="20%" android:textSize="13sp" android:textColor="@color/on_gold" android:background="@drawable/bg_button_primary" android:clickable="true" android:focusable="true" />
+                <TextView android:id="@+id/chip30" style="@style/TextLabel" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="6dp" android:padding="10dp" android:gravity="center" android:text="30%" android:textSize="13sp" android:textColor="@color/text_muted" android:background="@drawable/bg_button_ghost" android:clickable="true" android:focusable="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_logo_mark"
+                android:padding="18dp"
+                android:layout_marginTop="20dp">
+
+                <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CURRENT MONTHLY SPEND (THIS CATEGORY)" />
+                <TextView android:id="@+id/tvCurrentSpend" style="@style/TextHeading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="18sp" android:layout_marginTop="4dp" android:text="₹0" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#1FF2F0EA" android:layout_marginVertical="14dp" />
+
+                <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MONTHLY SAVING" />
+                <TextView android:id="@+id/tvMonthlySaving" style="@style/TextHeading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/mint" android:textSize="24sp" android:layout_marginTop="4dp" android:text="₹0" />
+
+                <TextView style="@style/TextLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:text="YEARLY SAVING" />
+                <TextView android:id="@+id/tvYearlySaving" style="@style/TextHeading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/mint" android:textSize="24sp" android:layout_marginTop="4dp" android:text="₹0" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

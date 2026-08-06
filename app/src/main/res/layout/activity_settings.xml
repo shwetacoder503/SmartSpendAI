@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/ink"
+    android:paddingTop="44dp"
+    android:paddingHorizontal="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/tvClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✕"
+            android:textSize="18sp"
+            android:textColor="@color/text_muted"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            style="@style/TextHeading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="Settings" />
+
+        <View android:layout_width="26dp" android:layout_height="1dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/surface"
+        android:padding="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Auto-detect UPI Expenses"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Automatically log expenses when GPay, PhonePe, or Paytm shows a payment notification. Cash expenses still need to be added manually."
+                    android:textColor="@color/text_muted"
+                    android:textSize="11.5sp" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switchAutoDetect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPermissionStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:textSize="11.5sp"
+            android:textStyle="bold"
+            android:text="" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="🔒 Privacy: this only reads notifications from GPay/PhonePe/Paytm to extract the amount and merchant. Everything else is ignored immediately and nothing is ever sent to any server."
+        android:textColor="@color/text_muted"
+        android:textSize="11sp"
+        android:lineSpacingExtra="3dp" />
+
+    <LinearLayout
+        android:id="@+id/llTestSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/surface"
+        android:padding="18dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧪 Test the pipeline"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Real UPI apps only post a notification for SOME transactions (mainly background ones). Use this to verify parsing + auto-save works, without waiting for a real payment."
+            android:textColor="@color/text_muted"
+            android:textSize="11.5sp" />
+
+        <Button
+            android:id="@+id/btnSimulateNotification"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_button_ghost"
+            android:text="Simulate a test UPI notification"
+            android:textAllCaps="false"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</LinearLayout>

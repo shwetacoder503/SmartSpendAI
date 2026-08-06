@@ -58,4 +58,8 @@ public class ExpenseEntity {
      */
     @ColumnInfo(name = "remote_id")
     public Long remoteId;
+
+    /** true = this row was auto-created from a UPI/bank notification, not typed in manually. */
+    @ColumnInfo(name = "is_auto_detected", defaultValue = "0")
+    public boolean isAutoDetected = false;
 }

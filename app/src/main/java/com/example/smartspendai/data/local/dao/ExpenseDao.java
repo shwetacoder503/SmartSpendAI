@@ -56,6 +56,10 @@ public interface ExpenseDao {
     @Query("SELECT COUNT(*) FROM expenses WHERE remote_id = :remoteId")
     int countByRemoteId(long remoteId);
 
+    /** Used by the auto-detect service to avoid double-adding the same payment (e.g. if a notification reposts). */
+    @Query("SELECT COUNT(*) FROM expenses WHERE amount = :amount AND date_millis BETWEEN :startMillis AND :endMillis")
+    int countSimilarRecent(double amount, long startMillis, long endMillis);
+
     // ---- Analytics queries (Milestone 4) ----
 
     @Query("SELECT category, SUM(amount) as total FROM expenses " +

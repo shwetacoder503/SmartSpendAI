@@ -12,14 +12,18 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.smartspendai.data.local.dao.CategoryDao;
 import com.example.smartspendai.data.local.dao.ExpenseDao;
+import com.example.smartspendai.data.local.dao.GoalDao;
 import com.example.smartspendai.data.local.entity.CategoryEntity;
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
+import com.example.smartspendai.data.local.entity.GoalContributionEntity;
+import com.example.smartspendai.data.local.entity.GoalEntity;
 
-@Database(entities = {ExpenseEntity.class, CategoryEntity.class}, version = 3, exportSchema = false)
+@Database(entities = {ExpenseEntity.class, CategoryEntity.class, GoalEntity.class, GoalContributionEntity.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ExpenseDao expenseDao();
     public abstract CategoryDao categoryDao();
+    public abstract GoalDao goalDao();
 
     private static volatile AppDatabase INSTANCE;
 

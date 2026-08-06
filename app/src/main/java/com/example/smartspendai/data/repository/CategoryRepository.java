@@ -32,15 +32,39 @@ public class CategoryRepository {
     }
 
     public void addCategory(String name, AddCategoryCallback callback) {
-        writeExecutor.execute(() -> {
-            if (categoryDao.countByName(name) > 0) {
-                callback.onDuplicate();
-                return;
+
+        final String formattedName;
+
+        if (name == null) {
+            formattedName = "";
+        } else {
+            String temp = name.trim();
+
+            if (!temp.isEmpty()) {
+                temp = temp.substring(0, 1).toUpperCase()
+                        + temp.substring(1).toLowerCase();
             }
+
+            formattedName = temp;
+        }
+
+        writeExecutor.execute(() -> {
+
+            List<CategoryEntity> categories = categoryDao.getAllCategoriesSync();
+
+            for (CategoryEntity c : categories) {
+                if (c.name.equalsIgnoreCase(formattedName)) {
+                    callback.onDuplicate();
+                    return;
+                }
+            }
+
             CategoryEntity category = new CategoryEntity();
-            category.name = name;
+            category.name = formattedName;
             category.isDefault = false;
+
             categoryDao.insert(category);
+
             callback.onAdded();
         });
     }

@@ -63,20 +63,67 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
     }
 
     @Override
+
     public void onBindViewHolder(@NonNull ExpenseViewHolder holder, int position) {
         ExpenseEntity expense = expenses.get(position);
 
         holder.tvTitle.setText(expense.title);
         holder.tvAmount.setText(String.format(Locale.getDefault(), "− ₹%.0f", expense.amount));
 
-        String emoji = CATEGORY_EMOJI.getOrDefault(expense.category, "📦");
-        holder.tvCategoryEmoji.setText(emoji);
+        String category = expense.category == null ? "" : expense.category.trim().toLowerCase();
+
+        switch (category) {
+            case "food":
+                holder.tvCategoryEmoji.setText("🍔");
+                break;
+
+            case "shopping":
+                holder.tvCategoryEmoji.setText("🛍️");
+                break;
+
+            case "travel":
+                holder.tvCategoryEmoji.setText("🚕");
+                break;
+
+            case "medical":
+                holder.tvCategoryEmoji.setText("💊");
+                break;
+
+            case "bills":
+                holder.tvCategoryEmoji.setText("💡");
+                break;
+
+            case "education":
+                holder.tvCategoryEmoji.setText("📚");
+                break;
+
+            case "entertainment":
+                holder.tvCategoryEmoji.setText("🎬");
+                break;
+
+            case "investment":
+                holder.tvCategoryEmoji.setText("📈");
+                break;
+
+            case "others":
+                holder.tvCategoryEmoji.setText("📦");
+                break;
+
+            default:
+                holder.tvCategoryEmoji.setText("📦");
+                break;
+        }
 
         CharSequence relativeDate = DateUtils.getRelativeTimeSpanString(
-                expense.dateMillis, System.currentTimeMillis(), DateUtils.DAY_IN_MILLIS);
+                expense.dateMillis,
+                System.currentTimeMillis(),
+                DateUtils.DAY_IN_MILLIS
+        );
+
         holder.tvCategoryDate.setText(expense.category + " · " + relativeDate);
 
         holder.itemView.setOnClickListener(v -> listener.onExpenseClick(expense));
+
         holder.itemView.setOnLongClickListener(v -> {
             listener.onExpenseLongClick(expense);
             return true;
