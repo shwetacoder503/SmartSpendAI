@@ -19,7 +19,8 @@ public class RetrofitClient {
     // Testing on a REAL phone instead? Replace this with your laptop's
     // local network IP (e.g. "http://192.168.1.5:8000/") and make sure
     // your phone + laptop are on the same Wi-Fi network.
-    private static final String BASE_URL = "http://127.0.0.1:8000/";
+    //private static final String BASE_URL = "http://127.0.0.1:8000/";
+    private static final String BASE_URL = "https://smartspendai-backend-1.onrender.com/";
 
     private static Retrofit retrofit;
 

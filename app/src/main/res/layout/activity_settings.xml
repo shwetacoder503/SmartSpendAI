@@ -124,6 +124,7 @@
             android:textColor="@color/text_muted"
             android:textSize="11.5sp" />
 
+
         <Button
             android:id="@+id/btnSimulateNotification"
             android:layout_width="match_parent"
@@ -134,6 +135,13 @@
             android:textAllCaps="false"
             android:textColor="@color/text_primary"
             android:textSize="13sp" />
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginTop="24dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

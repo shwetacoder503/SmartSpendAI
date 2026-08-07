@@ -20,6 +20,10 @@ import com.example.smartspendai.autodetect.ParsedTransaction;
 import com.example.smartspendai.autodetect.UpiNotificationParser;
 import com.example.smartspendai.data.local.AppDatabase;
 import com.example.smartspendai.data.local.entity.ExpenseEntity;
+import com.example.smartspendai.data.local.TokenManager;
+import com.example.smartspendai.ui.auth.LoginActivity;
+import androidx.appcompat.app.AlertDialog;
+
 
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -43,7 +47,28 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Button btnLogout = findViewById(R.id.btnLogout);
+        TokenManager tokenManager = new TokenManager(this);
+        btnLogout.setOnClickListener(v -> {
 
+            new AlertDialog.Builder(SettingsActivity.this)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+
+                        tokenManager.clearToken();
+
+                        Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                        startActivity(intent);
+                        finish();
+
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+
+        });
         findViewById(R.id.tvClose).setOnClickListener(v -> finish());
 
         switchAutoDetect = findViewById(R.id.switchAutoDetect);

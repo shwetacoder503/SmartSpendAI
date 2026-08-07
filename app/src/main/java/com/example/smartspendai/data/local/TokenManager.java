@@ -66,6 +66,9 @@ public class TokenManager {
     public String getToken() {
         return prefs.getString(KEY_TOKEN, null);
     }
+    public void clearToken() {
+        prefs.edit().clear().apply();
+    }
 
     public String getUserName() {
         return prefs.getString(KEY_USER_NAME, null);
